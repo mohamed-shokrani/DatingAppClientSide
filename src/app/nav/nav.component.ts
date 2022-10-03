@@ -7,16 +7,22 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  model: any = {}
+  model: any = {};
+  LoggedIn:boolean;
 
-  constructor(private accountService:AccountService) { }
+  constructor(public accountService:AccountService) { 
+  
+  }
 
   ngOnInit(): void {
+   
+
 
   }
   login(){
     this.accountService.login(this.model).subscribe(res=>{
        console.log(res);
+       this.LoggedIn =true
       
     },error=>{
        console.log(error);
@@ -25,5 +31,11 @@ export class NavComponent implements OnInit {
     
     
   }
+  LoggedOut(){
+    this.accountService.logOut();
+
+
+  }
+
 
 }
