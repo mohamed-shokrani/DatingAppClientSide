@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, ReplaySubject } from 'rxjs';
-import { Isuer } from '../_Models/user';
+import { IUser } from '../_Models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  baseURL = 'https://localhost:5001/api/Account/Login'
+  baseURL = 'https://localhost:5001/api/'
   //Creating an observable to store our user in 
-  private CurrenUserSource = new ReplaySubject<Isuer>(1)//one is the size of our buffer 
+  private CurrenUserSource = new ReplaySubject<IUser>(1)//one is the size of our buffer 
   ; //Special Type of observable//
   //  gonna store values inside inside her any type we subscribe to this obs 
   // is gonna emit last value inside it  
@@ -26,8 +26,8 @@ export class AccountService {
    login(model:any){
 
 
-    return this.http.post(this.baseURL ,model).pipe(
-      map((res:Isuer)=>{
+    return this.http.post(this.baseURL +'account/login',model).pipe(
+      map((res:IUser)=>{
         const user = res;
         if(user){
           localStorage.setItem('user',JSON.stringify(user))
@@ -36,7 +36,7 @@ export class AccountService {
       })
     ); 
   }
-  setCurrentUser(user:Isuer){
+  setCurrentUser(user:IUser){
     this.CurrenUserSource.next(user)
   }
   logOut(){
@@ -45,4 +45,15 @@ export class AccountService {
     
 
   }
+  Register(model:IUser){
+    return this.http.post(this.baseURL +'account/register' ,model).pipe(
+      map((user:any)=>{
+      if(user){
+        localStorage.setItem('user',JSON.stringify(user));
+        this.CurrenUserSource.next(user);
+      }
+      return user;
+    }))
+    }
+  
 }

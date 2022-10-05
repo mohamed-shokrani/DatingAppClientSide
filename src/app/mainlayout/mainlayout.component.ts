@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Isuer } from '../_Models/user';
+import { IUser } from '../_Models/user';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class MainlayoutComponent implements OnInit {
     this.setCurrentUser()
   }
   setCurrentUser(){
-   const user :Isuer =JSON.parse(localStorage.getItem('user'));
+   const user :IUser =JSON.parse(localStorage.getItem('user'));
    this.accoutnService.setCurrentUser(user); 
   }
 

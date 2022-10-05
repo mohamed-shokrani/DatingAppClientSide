@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 
@@ -7,10 +8,11 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  users:any ={}
   model: any = {};
   LoggedIn:boolean;
 
-  constructor(public accountService:AccountService) { 
+  constructor(public accountService:AccountService,private http:HttpClient) { 
   
   }
 
@@ -22,6 +24,7 @@ export class NavComponent implements OnInit {
   login(){
     this.accountService.login(this.model).subscribe(res=>{
        console.log(res);
+      
        this.LoggedIn =true
       
     },error=>{
@@ -36,6 +39,7 @@ export class NavComponent implements OnInit {
 
 
   }
+
 
 
 }

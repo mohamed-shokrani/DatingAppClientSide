@@ -10,6 +10,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MainlayoutComponent } from './mainlayout/mainlayout.component';
 import { NavComponent } from './nav/nav.component';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { MemberListComponent } from './member-list/member-list.component';
+import { MemberDetailsComponent } from './member-details/member-details.component';
+import { MessagesComponent } from './messages/messages.component';
+import { ListsComponent } from './lists/lists.component';
 
 
 
@@ -20,6 +26,12 @@ import { NavComponent } from './nav/nav.component';
     NotFoundComponent,
     MainlayoutComponent,
     NavComponent,
+    HomeComponent,
+    RegisterComponent,
+    MemberListComponent,
+    MemberDetailsComponent,
+    MessagesComponent,
+    ListsComponent,
     
   ],
   imports: [
