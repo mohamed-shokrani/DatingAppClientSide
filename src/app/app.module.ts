@@ -19,6 +19,7 @@ import { MemberDetailsComponent } from './member-details/member-details.componen
 import { MessagesComponent } from './messages/messages.component';
 import { ListsComponent } from './lists/lists.component';
 import { MainBodyComponent } from './main-body/main-body.component';
+import { SharedModule } from './_modules/shared.module';
 
 
 
@@ -44,8 +45,7 @@ import { MainBodyComponent } from './main-body/main-body.component';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    BsDropdownModule.forRoot(),
-    ToastrModule.forRoot({ positionClass:'toast-bottom-right' }),
+   SharedModule
     
 
     

@@ -9,11 +9,11 @@ import { IUser } from '../_Models/user';
 export class AccountService {
   baseURL = 'https://localhost:5001/api/'
   //Creating an observable to store our user in 
-  private CurrenUserSource = new ReplaySubject<IUser>(1)//one is the size of our buffer 
+  private CurrentUserSource = new ReplaySubject<IUser>(1)//one is the size of our buffer 
   ; //Special Type of observable//
   //  gonna store values inside inside her any type we subscribe to this obs 
   // is gonna emit last value inside it  
-  CurrenUser$ = this.CurrenUserSource.asObservable()
+  CurrentUser$ = this.CurrentUserSource.asObservable()
 
   constructor(private http:HttpClient) {
     
@@ -29,17 +29,17 @@ export class AccountService {
         const user = res;
         if(user){
           localStorage.setItem('user',JSON.stringify(user))
-          this.CurrenUserSource.next(user);
+          this.CurrentUserSource.next(user);
         }
       })
     ); 
   }
   setCurrentUser(user:IUser){
-    this.CurrenUserSource.next(user)
+    this.CurrentUserSource.next(user)
   }
   logOut(){
     localStorage.removeItem('user');
-    this.CurrenUserSource.next(null);
+    this.CurrentUserSource.next(null);
     
 
   }
@@ -48,7 +48,7 @@ export class AccountService {
       map((user:IUser)=>{
       if(user){
         localStorage.setItem('user',JSON.stringify(user));
-        this.CurrenUserSource.next(user);
+        this.CurrentUserSource.next(user);
       }
       return user;
     }))

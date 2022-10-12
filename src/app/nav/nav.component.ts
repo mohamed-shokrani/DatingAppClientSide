@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { IUser } from '../_Models/user';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
 
 
-
+this.setCurrenUser();
   }
   login() {
     this.accountService.login(this.model).subscribe(res => {
@@ -31,20 +32,16 @@ export class NavComponent implements OnInit {
 
 
     }, error => {
-      console.log(error);
+     // console.log(error);
       this.toastr.error(error.error);
 
     })
-
-
+  }
+  setCurrenUser(){
+    const user:IUser = JSON.parse(localStorage.getItem('user'))
+    this.accountService.setCurrentUser(user)
   }
   LoggedOut() {
-
     this.accountService.logOut();
-
-
   }
-
-
-
 }
