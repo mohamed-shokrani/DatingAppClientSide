@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   registerMode:boolean =false;
+  users:any={}
   //openRegister:boolean =false;
 
-  constructor() { }
+  constructor(private loc:Location) { }
 
   ngOnInit(): void {
    // this.getUsers()
@@ -28,5 +30,6 @@ export class HomeComponent implements OnInit {
   CancelRegisterMode(event:boolean){
     this.registerMode = event
   }
+  
 
 }

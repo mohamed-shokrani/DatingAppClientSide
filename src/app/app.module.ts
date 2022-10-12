@@ -1,3 +1,5 @@
+import { ToastrModule } from 'ngx-toastr';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -16,6 +18,7 @@ import { MemberListComponent } from './member-list/member-list.component';
 import { MemberDetailsComponent } from './member-details/member-details.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ListsComponent } from './lists/lists.component';
+import { MainBodyComponent } from './main-body/main-body.component';
 
 
 
@@ -32,6 +35,7 @@ import { ListsComponent } from './lists/lists.component';
     MemberDetailsComponent,
     MessagesComponent,
     ListsComponent,
+    MainBodyComponent,
     
   ],
   imports: [
@@ -41,6 +45,9 @@ import { ListsComponent } from './lists/lists.component';
     BrowserAnimationsModule,
     FormsModule,
     BsDropdownModule.forRoot(),
+    ToastrModule.forRoot({ positionClass:'toast-bottom-right' }),
+    
+
     
     
 

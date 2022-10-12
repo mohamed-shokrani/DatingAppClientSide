@@ -1,57 +1,44 @@
 <nav class="navbar navbar-expand-md  navbar-dark fixed-top bg-dark" id="nav">
-    <div class="container">
+  <div class="container" >
 
-            <a class="navbar-brand" href="#">Dating APP</a>
-            
-              <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.CurrenUser$|async">
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" [routerLink]="['/messages']" href="#">Messages </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#" [routerLink]="['/memberlist']">Matches </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#"  [routerLink]="['/lists']">Lists</a>
-                </li>
-              </ul>
+    <a class="navbar-brand" href="#" [routerLink]="['/home']">Dating APP</a>
 
-              <div class="btn-group" dropdown  *ngIf="accountService.CurrenUser$|async">
-                <button id="button-animated"  dropdownToggle type="button" class="btn btn-primary w-100 dropdown-toggle"
-                        aria-controls="dropdown-animated">
-                  {{users.userName}} <span class="caret"></span>
-                </button>
-                <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
-                    role="menu" aria-labelledby="button-animated">
-                  <li role="menuitem"><a class="dropdown-item" href="#">Edit</a>
-                  </li>
-                  <li role="menuitem"><a class="dropdown-item" (click)="LoggedOut()" href="#">LoggedOut else
-                    here</a></li>
-                </ul>
-              </div>
+    <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.CurrenUser$|async">
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" aria-current="page" [routerLink]="['/messages']" href="#">Messages
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" routerLinkActive="active" [routerLink]="['/members']">Matches </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" routerLinkActive="active" [routerLink]="['/lists']">Lists</a>
+      </li>
+    </ul>
 
-
-
+    <div class="btn-group" dropdown *ngIf="accountService.CurrenUser$|async">
+      <button id="button-animated" dropdownToggle type="button" class="btn btn-primary w-100 dropdown-toggle"
+        aria-controls="dropdown-animated">
+        {{users.userName}} <span class="caret"></span>
+      </button>
+      <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+        <li role="menuitem"><a class="dropdown-item" href="#">Edit</a>
+        </li>
+        <li role="menuitem"><a class="dropdown-item" [routerLink]="['/home']" (click)="LoggedOut()" href="#">LoggedOut
+            else
+            here</a></li>
+      </ul>
+    </div>
 
 
+    <form *ngIf="(accountService.CurrenUser$|async) ===null" class="d-flex" role="search" #loginForm="ngForm"
+      (ngSubmit)="login()" autocomplete="off">
+      <input name="username" [(ngModel)]="model.username" class="form-control me-2" type="text" placeholder="username">
+      <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password"
+        placeholder="Password">
 
+      <button class="btn btn-outline-success" type="submit">Login</button>
+    </form>
+  </div>
 
-
-
-
-
-
-
-
-
-
-
-              <form *ngIf="(accountService.CurrenUser$|async) ===null" class="d-flex" role="search" #loginForm="ngForm" (ngSubmit)="login()"
-              autocomplete="off">
-                <input  name="username" [(ngModel)]="model.username" class="form-control me-2" type="text" placeholder="username">
-                <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password" placeholder="Password">
-
-                <button class="btn btn-outline-success" type="submit">Login</button>
-              </form>
-          </div>
-   
-  </nav>
+</nav>

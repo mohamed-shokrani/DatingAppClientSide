@@ -24,8 +24,6 @@ export class AccountService {
    // component are different when we move from component to component in angluar they are destroyed 
 
    login(model:any){
-
-
     return this.http.post(this.baseURL +'account/login',model).pipe(
       map((res:IUser)=>{
         const user = res;
@@ -47,7 +45,7 @@ export class AccountService {
   }
   Register(model:IUser){
     return this.http.post(this.baseURL +'account/register' ,model).pipe(
-      map((user:any)=>{
+      map((user:IUser)=>{
       if(user){
         localStorage.setItem('user',JSON.stringify(user));
         this.CurrenUserSource.next(user);
