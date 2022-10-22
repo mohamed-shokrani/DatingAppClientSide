@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TestErrorsComponent } from './Errors/test-errors/test-errors.component';
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
 import { MainlayoutComponent } from './mainlayout/mainlayout.component';
@@ -9,6 +10,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { NavComponent } from './nav/nav.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RegisterComponent } from './register/register.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
 import { AuthGuard } from './_guards/auth.guard';
 
 // const routes: Routes = [
@@ -57,7 +59,11 @@ const routes: Routes = [
       {path: 'messages', component: MessagesComponent},
     ]
   },
+  {path:"error",component:TestErrorsComponent},
   {path: 'register', component:RegisterComponent},
+  {path:'not-found',component:NotFoundComponent},
+  {path:'server-error',component:ServerErrorComponent},
+
   // {path: 'not-found', component: NotFoundComponent},
   // {path: 'server-error', component: ServerErrorComponent},
   // {path: '**', component: NotFoundComponent, pathMatch: 'full'},

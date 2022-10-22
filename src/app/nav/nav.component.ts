@@ -28,15 +28,14 @@ this.setCurrenUser();
   login() {
     this.accountService.login(this.model).subscribe(res => {
 
-     // console.log(res);
+    this.router.navigateByUrl('/members');
 
+    // }, error => {
+    //  // console.log(error);
+    //   this.toastr.error(error.error);
 
-    }, error => {
-     // console.log(error);
-      this.toastr.error(error.error);
-
-    })
-  }
+    // })
+    })}
   setCurrenUser(){
     const user:IUser = JSON.parse(localStorage.getItem('user'))
     this.accountService.setCurrentUser(user)

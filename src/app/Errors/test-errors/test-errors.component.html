@@ -1,0 +1,20 @@
+<p>test-errors works!</p>
+<ng-container >
+    <div class="buttons">
+
+    <button class="btn btn-info" (click)="get400Error()">bad request 400</button>
+
+    <button class="btn btn-info" (click)="get500Error()">Server error 500 </button>
+
+    <button class="btn btn-info" (click)="get401Error()">auth error 401</button>
+
+    <button class="btn btn-info" (click)="get400ValidationError()">get400ValidationError 400</button>
+
+    <button class="btn btn-info" (click)="get404Error()">not found  404</button>
+<div class="row mt-5" *ngIf="ValidationError.length >0">
+    <ul class="text-danger" *ngFor="let error of ValidationError">
+        {{error}}
+    </ul>
+</div>        
+</div>
+</ng-container>
