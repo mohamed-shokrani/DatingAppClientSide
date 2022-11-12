@@ -23,6 +23,7 @@ import { SharedModule } from './_modules/shared.module';
 import { TestErrorsComponent } from './Errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { ServerErrorComponent } from './server-error/server-error.component';
+import { MemberCardComponent } from './member-list/member-card/member-card.component';
 
 
 
@@ -42,6 +43,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     MainBodyComponent,
     TestErrorsComponent,
     ServerErrorComponent,
+    MemberCardComponent
     
   ],
   imports: [
