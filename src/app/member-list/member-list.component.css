@@ -1,0 +1,8 @@
+.myclass{
+    padding: 10px;
+    margin: 10px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    display: flex;
+    width: 15%;
+}

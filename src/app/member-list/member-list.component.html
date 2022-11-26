@@ -1,11 +1,9 @@
 <div class="row">
-    <div class="col-5">
-        <div class="" *ngFor="let member of members">
+    <div class="myclass" id="mycard" *ngFor="let member of members">
 
-   
 
-            <app-member-card [getMembers] ="member" ></app-member-card>
-    
-    </div>
+
+        <app-member-card [getMembers]="member"></app-member-card>
+
     </div>
 </div>

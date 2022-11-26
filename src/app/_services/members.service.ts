@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Member } from '../_Models/memebr';
 const httpOptions= {
   headers:new HttpHeaders({
-    Authorization:'Bearer '+ JSON.parse(localStorage.getItem('user')).token
+    Authorization:'Bearer ' + JSON.parse(localStorage.getItem('user')).token
   })
 }
 

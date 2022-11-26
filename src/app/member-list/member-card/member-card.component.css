@@ -9,7 +9,7 @@
     flex-direction:row !important;
 
     display: flex !important;
-
+    width: 10em;
     justify-content: center !important;
     align-items: center !important;
     border-radius: 20px;
@@ -90,7 +90,7 @@
 
 
 .card .card-content .social-icons li {
-    margin: 10px;
+   
     transition: 0.5s;
     transition-delay: calc(0.15s * var(--i));
     transform: translateY(50px);
