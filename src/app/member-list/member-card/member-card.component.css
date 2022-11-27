@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+ /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+ */
 
 
 
 
-
-
-.card {
+/* .card {
     flex-direction:row !important;
 
     display: flex !important;
@@ -20,8 +20,51 @@
     border: none;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 
+} */
+.card:hover img{
+    transform: scale(1.2,1.2);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+    opacity: .7;
 }
+.card img{
+    transform: scale(1.0,1.0);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
 
+}
+.card-img-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+.member-icons{
+    position: absolute;
+    bottom: -30%;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    opacity: 0;
+
+}
+.card-img-wrapper:hover .member-icons{
+    bottom: 0;
+    opacity: 1;
+}
+.animate{
+    transition: all 0.3s ease-in-out;
+}
+button i {
+    font-size: 30px;
+
+   
+    color: white;
+
+}
+.btn-btn-primary{
+    background-color: #e95420 !important;
+}
+/*
 .card .card-block {
     display: flex !important;
    flex-wrap: wrap !important;
@@ -90,7 +133,7 @@
 
 
 .card .card-content .social-icons li {
-   
+
     transition: 0.5s;
     transition-delay: calc(0.15s * var(--i));
     transform: translateY(50px);
@@ -116,4 +159,4 @@
 
     .container .row .col-lg-4 {
         margin: 20px 0px;
-    } */
+    } */ 
