@@ -2,8 +2,7 @@
 
 
 
-<h2>dtails</h2>
-<h1 *ngIf="member">{{member.userName}}</h1>
+<h1 class="pt-2"  *ngIf="member">{{member.userName| uppercase}}</h1>
 <div class="row"  *ngIf="member">
     <div class="col-4">
     <div class="card">
@@ -16,11 +15,11 @@
         </div>
         <div>
             <strong>Age</strong>
-            <p>{{member.Age}}, {{member.country}}</p>
+            <p>{{member.age}}, </p>
         </div>
         <div>
             <strong>Member Since</strong>
-            <p>{{member.createdAt}}, {{member.country}}</p>
+            <p>{{member.created}}, {{member.country}}</p>
         </div>
         <div>
             <strong>Member Last Active</strong>
