@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditmemberComponent } from './editmember/editmember.component';
 import { TestErrorsComponent } from './Errors/test-errors/test-errors.component';
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
@@ -55,6 +56,8 @@ const routes: Routes = [
     children: [
       {path: 'members', component: MemberListComponent},
      {path: 'members/:username', component:MemberDetailsComponent},
+     {path: 'member/edit', component:EditmemberComponent},
+
       {path: 'lists', component: ListsComponent},
       {path: 'messages', component: MessagesComponent},
     ]

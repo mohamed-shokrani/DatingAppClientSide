@@ -29,7 +29,7 @@
        Welcome {{user.userName | titlecase}} <span class="caret"></span>
       </button>
       <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
-        <li role="menuitem"><a class="dropdown-item" href="#">Edit</a>
+        <li role="menuitem"><a routerLink="/member/edit" class="dropdown-item" href="#">Edit</a>
         </li>
         <li role="menuitem"><a class="dropdown-item" [routerLink]="['/home']" (click)="LoggedOut()" href="#">LoggedOut
             else

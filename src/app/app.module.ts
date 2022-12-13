@@ -24,6 +24,7 @@ import { TestErrorsComponent } from './Errors/test-errors/test-errors.component'
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { MemberCardComponent } from './member-list/member-card/member-card.component';
+import { EditmemberComponent } from './editmember/editmember.component';
 
 
 
@@ -43,7 +44,8 @@ import { MemberCardComponent } from './member-list/member-card/member-card.compo
     MainBodyComponent,
     TestErrorsComponent,
     ServerErrorComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    EditmemberComponent
     
   ],
   imports: [
