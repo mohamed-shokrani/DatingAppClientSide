@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
+
 import { Member } from '../_Models/memebr';
 import { MembersService } from '../_services/members.service';
 
@@ -54,5 +55,6 @@ export class MemberDetailsComponent implements OnInit {
       this.galleryImages = this.getImages();
     })
   }
+
 
 }

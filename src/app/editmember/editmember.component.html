@@ -1,4 +1,83 @@
-<h1 *ngIf="Member">
-    {{Member.userName}}
-</h1>
-<h2>edit member</h2>
+
+
+
+
+
+<h1 class="pt-2"  *ngIf="member">{{member.userName| uppercase}}</h1>
+<div class="row"  *ngIf="member">
+    <div class="col-4">
+        <h1> Your Profile </h1>
+    </div>
+    <div class="col-8">
+        <div class="alert alert-info">
+            <p><strong>Information </strong>you have made changes. any unsaved changes will be discarded</p>
+        </div>
+    </div>
+    <div class="col-4">
+    <div class="card">
+        <img src="{{member.photoUrl|| './assets/user.png'}}" alt="{{member.knownAs}}">
+    </div>
+    <div class="card-body">
+        <div>
+            <strong>Location</strong>
+            <p>{{member.city}}, {{member.country}}</p>
+        </div>
+        <div>
+            <strong>Age</strong>
+            <p>{{member.age}}, </p>
+        </div>
+        <div>
+            <strong>Member Since</strong>
+            <p>{{member.created}}</p>
+        </div>
+        <div>
+            <strong>Member Last Active</strong>
+            <p>{{member.lastActive}}</p>
+        </div>
+        <div class="card-footer">
+            <button  form="editForm"   [disabled]="!editForm.dirty" type="submit" class="btn btn-primary btn-blocked">Save Changes</button>
+
+        </div>
+    </div>
+</div>
+<div class="col-8">
+    <div >
+        <tabset class="member-tabset">
+          <tab heading='About {{member.knownAs}}'>
+         <form id="editForm" #editForm="ngForm" (ngSubmit)="updateMember()"> 
+            <!-- template refernce variable to make our form angluar form #eidtfrom is how to make our form angluar form  -->
+            <h4>Describtion</h4>  
+            <textarea  class="form-control shadow bg-light border-opacity-75" [(ngModel)]="member.introduction" name="introduction" rows="6"></textarea>
+              <h4 class="mt-2">Interests</h4>
+            <textarea class="form-control shadow bg-light border-opacity-75" [(ngModel)]="member.interests" name="Interests" rows="6"></textarea>
+            <h4 class="mt-2">lookingFor</h4>
+  
+            <textarea class="form-control shadow bg-light border-opacity-75" [(ngModel)]="member.lookingFor" name="lookingFor" rows="6"></textarea>
+            <h4>Location Details: </h4>
+            <div class="d-inline-flex justify-content-between">
+                <div class="">
+                    <label  for="city">City: </label>
+                    <input class="form-control shadow bg-light border-opacity-75 mx-2" [(ngModel)]="member.introduction" type="text" name="city" >
+                </div>
+                <div class="col-4">
+                    
+              <label for="country">Country: </label>
+              <input class="form-control shadow bg-light border-opacity-75 mx-2" [(ngModel)]="member.country" type="text" name="country" >
+                </div>
+            
+  
+            </div>
+         </form>
+
+           
+          </tab>
+          <tab heading='Edit Photo'>
+    
+            <p>Edit Phots will be here</p>
+            
+          </tab>
+        
+        </tabset>
+    </div>
+</div>
+</div>

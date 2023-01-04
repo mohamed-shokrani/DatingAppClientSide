@@ -24,7 +24,7 @@ export class AccountService {
    // component are different when we move from component to component in angluar they are destroyed 
 
    login(model:any){
-    return this.http.post(this.baseURL +'account/login',model).pipe(
+    return this.http.post(this.baseURL +'account/login', model).pipe(
       map((res:IUser)=>{
         const user = res;
         if(user){

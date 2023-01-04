@@ -1,3 +1,13 @@
 .card-footer{
     padding: 0 25px;
+    background-color: #fff;
+    border-top: none;
+}
+.card-body{
+    padding: 0 25px;
+}
+.img-thumbnail{
+    margin: 25%;
+    width: 85%;
+    height: 85%;
 }
