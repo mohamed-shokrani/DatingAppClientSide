@@ -25,7 +25,10 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { MemberCardComponent } from './member-list/member-card/member-card.component';
 import { EditmemberComponent } from './editmember/editmember.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 
+//import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 
@@ -45,7 +48,8 @@ import { EditmemberComponent } from './editmember/editmember.component';
     TestErrorsComponent,
     ServerErrorComponent,
     MemberCardComponent,
-    EditmemberComponent
+    EditmemberComponent,
+    
     
   ],
   imports: [
@@ -54,15 +58,15 @@ import { EditmemberComponent } from './editmember/editmember.component';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-   SharedModule
+    SharedModule,
     
-
-    
-    
-
-    
+    NgxSpinnerModule  
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true}],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

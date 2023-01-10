@@ -9,8 +9,8 @@
         <h1> Your Profile </h1>
     </div>
     <div class="col-8">
-        <div class="alert alert-info">
-            <p><strong>Information </strong>you have made changes. any unsaved changes will be discarded</p>
+        <div class="alert alert-info" *ngIf="editForm.dirty">
+            <strong>Information </strong>you have made changes. any unsaved changes will be discarded
         </div>
     </div>
     <div class="col-4">
@@ -57,7 +57,7 @@
             <div class="d-inline-flex justify-content-between">
                 <div class="">
                     <label  for="city">City: </label>
-                    <input class="form-control shadow bg-light border-opacity-75 mx-2" [(ngModel)]="member.introduction" type="text" name="city" >
+                    <input class="form-control shadow bg-light border-opacity-75 mx-2" [(ngModel)]="member.city" type="text" name="city" >
                 </div>
                 <div class="col-4">
                     

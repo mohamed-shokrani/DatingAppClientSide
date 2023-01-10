@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { IUser } from '../_Models/user';
+import { User } from '../_Models/user';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -37,10 +37,13 @@ this.setCurrenUser();
     // })
     })}
   setCurrenUser(){
-    const user:IUser = JSON.parse(localStorage.getItem('user'))
+    const user:User = JSON.parse(localStorage.getItem('user'))
     this.accountService.setCurrentUser(user)
   }
   LoggedOut() {
     this.accountService.logOut();
+    this.router.navigate(["/home"]);
+   
+
   }
 }
