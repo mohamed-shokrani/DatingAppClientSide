@@ -13,6 +13,7 @@ import { AccountService } from '../_services/account.service';
 export class NavComponent implements OnInit {
   users: any = {}
   model: any = {};
+  
   LoggedIn: boolean;
 
   constructor(public accountService: AccountService, private http: HttpClient, private router: Router

@@ -30,10 +30,11 @@ export class EditmemberComponent implements OnInit {
     this.AcoountSevice.CurrentUser$.pipe(take(1)).subscribe(user=> this.user = user)
 
    }
+   
                         
    ngOnInit(): void {
     this.loadMember()
-
+    
   }
 
   loadMember() {

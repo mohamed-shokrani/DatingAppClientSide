@@ -8,8 +8,8 @@ import { EditmemberComponent } from '../editmember/editmember.component';
 })
 export class PreventUnsavedChangesGuard implements CanDeactivate<unknown> {
   canDeactivate
-    (component: EditmemberComponent):boolean{
-      if(component.edidtForm.dirty){
+    (component: EditmemberComponent): Observable<boolean> | boolean{
+      if(component.edidtForm?.dirty){
         //isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
         return confirm("Are you sure you want to continue? any unsaved changes will be discarded")
       }
