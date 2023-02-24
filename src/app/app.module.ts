@@ -27,6 +27,7 @@ import { MemberCardComponent } from './member-list/member-card/member-card.compo
 import { EditmemberComponent } from './editmember/editmember.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { EditMemberPhotoComponent } from './editmember/edit-member-photo/edit-member-photo.component';
 
 //import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -49,6 +50,7 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
     ServerErrorComponent,
     MemberCardComponent,
     EditmemberComponent,
+    EditMemberPhotoComponent,
     
     
   ],

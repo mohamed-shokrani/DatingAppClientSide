@@ -9,7 +9,7 @@ import { Member } from '../_Models/memebr';
 // so services make a good candidate for storing application state 
 const httpOptions= {
   headers:new HttpHeaders({
-    Authorization:'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJsaXNhIiwibmJmIjoxNjc1NTIwODQyLCJleHAiOjE2NzU3ODAwNDIsImlhdCI6MTY3NTUyMDg0Mn0.ORIC-6rRn4VHm5EfPNuxhvt7UFaBsHY3sHUldzINTo8pY5FsuvIJCUU_OqCugtVuW6ovnoBbNrd3O3CIYFmxgA'// + JSON.parse(localStorage.getItem('user'))?.token
+    Authorization:'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJsaXNhIiwibmJmIjoxNjc3MTk5NDY2LCJleHAiOjE2Nzc0NTg2NjYsImlhdCI6MTY3NzE5OTQ2Nn0.J8FowBK2-If42n_jwz-FfvkhO2wLSBIqJdQyPIRdkEjUxoF1Bb5bFKiVjhkFX1F2UZdLiifK4KK3KrOyXHNQbQ'// + JSON.parse(localStorage.getItem('user'))?.token
   })
 }
 
