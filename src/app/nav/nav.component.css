@@ -2,3 +2,13 @@
     z-index: 1000!important;
     top:0%;
 }
+.dropdown-toggle, .dropdown-item{
+cursor: pointer;
+}
+.img{
+    max-height: 50px;
+    border: 1px solid #fff;
+    display: inline;
+    border-radius: 5px;
+    justify-content: space-between;
+}

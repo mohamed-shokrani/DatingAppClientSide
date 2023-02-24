@@ -3,8 +3,10 @@ import { Component, Input } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { take } from 'rxjs';
 import { Member } from 'src/app/_Models/memebr';
+import { Photo } from 'src/app/_Models/photo';
 import { User } from 'src/app/_Models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { MembersService } from 'src/app/_services/members.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -18,7 +20,7 @@ export class EditMemberPhotoComponent {
   hasBaseDropZoneOver=false;
   baseUrl =environment.apiUrl;
   user:User;
-  constructor(private accountService:AccountService){
+  constructor(private accountService:AccountService,private memberSevice:MembersService){
     this.accountService.CurrentUser$.pipe(take(1)).subscribe(user=>{
       this.user =user
     })
@@ -51,5 +53,21 @@ intializeUploader(){
     }
 
   }
+  
+}
+setMainPhoto(photo:Photo){
+  console.log(photo.id);
+  this.memberSevice.setMainPhoto(photo.id).subscribe(()=>{
+  console.log(photo.id);
+  
+    this.user.photoUrl = photo.url;
+    this.accountService.setCurrentUser(this.user);//which is gonna update both our current user observable 
+    //and update our user photo inside local storage 
+    this.member.photoUrl =photo.url;
+    this.member.photos.forEach(p=>{
+      if(p.isMain) p.isMain =false;
+      if(p.id === photo.id) p.isMain = true
+    })
+  })
 }
 }

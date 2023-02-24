@@ -9,3 +9,6 @@ img.img-thumbnai{
 input[type=file] {
     color: transparent;
 }
+#trash{
+    max-height: 30px;
+}

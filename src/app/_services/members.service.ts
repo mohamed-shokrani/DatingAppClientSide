@@ -4,14 +4,14 @@ import { Injectable } from '@angular/core';
 import { map, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_Models/memebr';
+import { Photo } from '../_Models/photo';
 //remeber services are singletons that instantiated when the  component needs the service 
 // and it operates as a singlton and it stays alive until the application is closed 
 // so services make a good candidate for storing application state 
 const httpOptions= {
   headers:new HttpHeaders({
-    Authorization:'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJsaXNhIiwibmJmIjoxNjc3MTk5NDY2LCJleHAiOjE2Nzc0NTg2NjYsImlhdCI6MTY3NzE5OTQ2Nn0.J8FowBK2-If42n_jwz-FfvkhO2wLSBIqJdQyPIRdkEjUxoF1Bb5bFKiVjhkFX1F2UZdLiifK4KK3KrOyXHNQbQ'// + JSON.parse(localStorage.getItem('user'))?.token
-  })
-}
+    Authorization:'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJsaXNhIiwibmJmIjoxNjc3MjY4Mjg5LCJleHAiOjE2Nzg5OTYyODksImlhdCI6MTY3NzI2ODI4OX0.f0cFs5pB2qUxpqEuRsKOrkrGLKYhNxNkJhjjcs-dSxRbMrlGfCVLhjF1S2q-L8CGXBZP44xKrld3VCbH6SXCHw'
+})}
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +51,9 @@ export class MembersService {
         this.members[index] =memebr;  
       })
     );
+   }
+   setMainPhoto(photoId:number){
+    console.log(photoId);
+          return this.http.put(this.apiUrl+'users/set-main-photo/'+ photoId , {},httpOptions)
    }
 }
