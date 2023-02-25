@@ -56,4 +56,7 @@ export class MembersService {
     console.log(photoId);
           return this.http.put(this.apiUrl+'users/set-main-photo/'+ photoId , {},httpOptions)
    }
+   DeletePhoto(photoId:number){
+    return this.http.delete(this.apiUrl+'users/delete-photo/'+ photoId ,httpOptions)
+   }
 }

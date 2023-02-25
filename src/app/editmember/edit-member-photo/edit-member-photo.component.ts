@@ -70,4 +70,12 @@ setMainPhoto(photo:Photo){
     })
   })
 }
+DeletePhotoByUser(photoId:number){
+  this.memberSevice.DeletePhoto(photoId).subscribe(()=>{
+    this.member.photos = this.member.photos.filter(x=>x.id != photoId);//just filter out all of the other photo // 
+    //returns an array of all of the photo that are not equal to the photo id that we passing in paramter
+    //we do not need to worry about handling the errors because our interceptors taken care of this for us
+    
+  })
+}
 }
