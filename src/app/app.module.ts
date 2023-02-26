@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MainlayoutComponent } from './mainlayout/mainlayout.component';
@@ -61,6 +61,7 @@ import { EditMemberPhotoComponent } from './editmember/edit-member-photo/edit-me
     BrowserAnimationsModule,
     FormsModule,
     SharedModule,
+    ReactiveFormsModule,
     
     NgxSpinnerModule  
   ],

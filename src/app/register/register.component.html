@@ -1,6 +1,6 @@
 <div class=" mt-5">
 
-<form #registerForm="ngForm" (ngSubmit)="Register()" autocomplete="off">
+<form [formGroup]="registerForm" (ngSubmit)="Register()" autocomplete="off">
 
     <h2 class="text-center ">Sign Up</h2>
     <hr class="align-content-between m-4 ">
@@ -15,11 +15,57 @@
         </select>
     </div> -->
     
-    <div class="col-centered w-50 form-group" >
-        <input class="form-control mb-3 "  type="text" name="username" [(ngModel)]="model.username" placeholder="username" id="">
-    </div>
-    <div class="col-centered w-50 form-group">
-        <input type="password" class="form-control" name="password" [(ngModel)]="model.password" placeholder="password" id="">
+    <div class="userinput col-centered col-9 ">
+        <div class="col-centered w-50 form-group " >
+            <div>
+                <span class="asterisk_input">  </span>    
+                <input [class.is-invalid]='registerForm.get("userName").errors &&
+                registerForm.get("userName").touched '
+                 class="form-control mb-3 " 
+                  type="text" 
+                  formControlName="userName"
+                    placeholder="username" 
+                    >
+                    <div class="invalid-feedback"><strong > Please enter a username</strong> </div>
+            </div>
+           
+        </div>
+        <div class="col-centered w-50 form-group">
+            <input
+            [class.is-invalid]='registerForm.get("Password").errors &&
+            registerForm.get("Password").touched '
+             type="password" class="form-control" 
+             formControlName="Password" 
+             placeholder="password" >
+             <div *ngIf="registerForm.get('Password').hasError('required')"class="invalid-feedback">
+                
+                <strong >Please enter a passowrd</strong>
+             </div>
+             <div *ngIf="registerForm.get('Password').hasError('maxlength')" class="invalid-feedback">
+                <strong>Your password can not be more than 20 characters</strong> 
+             </div>
+             <div *ngIf="registerForm.get('Password').hasError('minlength')" lass="invalid-feedback">
+                <strong >Your password can not be less than 4 characters</strong> 
+             </div>
+            
+        </div>
+
+        <div class="col-centered w-50 form-group">
+            
+            <input
+            [class.is-invalid]='registerForm.get("ConfirmPassowrd").errors &&
+            registerForm.get("ConfirmPassowrd").touched '
+             type="password" class="form-control"
+              formControlName="ConfirmPassowrd" placeholder="Confirm pass" id="">
+            
+            <div *ngIf="registerForm.get('ConfirmPassowrd').hasError('required')"class="invalid-feedback">
+                
+                <strong >This field is required</strong>
+             </div>
+            <div *ngIf="registerForm.get('ConfirmPassowrd').hasError('IsMatching')" class="invalid-feedback">
+            <strong>Your Password and Confirmed Passoword must be idedntical</strong>
+             </div>
+        </div>
     </div>
     <div class="col-centered w-50 text-center form-group mt-3 "  >
         <button class="btn btn-success mx-2" type="submit" >Register</button>
@@ -28,5 +74,7 @@
 
     </div>
 </form>
+<p>{{registerForm.value | json}}</p>
+<p>{{registerForm.status | json}}</p>
 
 </div>

@@ -2,3 +2,18 @@
     margin: 0 auto;
     float: none;
 }
+.userinput div{
+    margin-top: 10px;
+}
+/* strong{
+    padding: 70px 0;
+    border: 3px solid green;
+    text-align: center;
+} */
+/* .asterisk_input::after {
+    content:" *"; 
+    color: #e32;
+    position: absolute; 
+    margin: -.8rem 0px 0px 29rem; 
+    font-size: xx-large; 
+    padding: 0 0px 0 0; } */
