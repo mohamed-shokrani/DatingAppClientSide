@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
@@ -11,27 +11,38 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  maxDate:Date;
+  showDat:number;
+
   @Output() CancelRegister = new EventEmitter();
   model:any ={};
   registerForm:FormGroup;
 
 
   constructor(public route:Router,private accountService:AccountService
-    ,private toastr:ToastrService) { }
+    ,private toastr:ToastrService ,private fb:FormBuilder) { }
+    
 
   ngOnInit(): void {
 this.IntializeForm();
+this.maxDate =new Date();
+this.maxDate.setFullYear(  this.maxDate.getFullYear() -18);
   }
   IntializeForm(){
-    this.registerForm = new FormGroup({
-      userName :new FormControl('',Validators.required),
-      Password: new FormControl('',[Validators.required,Validators.minLength(4),Validators.maxLength(20)]),
-      ConfirmPassowrd: new FormControl('',[Validators.required, this.MatchValues('Password')])
+    this.registerForm = this.fb.group({
+      gender:['male'],
+      username :['',Validators.required],
+      DateOfBirth :['',Validators.required],
+      KnownAs :['',Validators.required],
+      City :['',Validators.required],
+      Country :['',Validators.required],
+      MyPass: ['',[Validators.required,Validators.minLength(4),Validators.maxLength(20)]],
+      confirmPassowrd: ['',[Validators.required, this.MatchValues('MyPass')]]
       // but there is a problem her if you changed the password after you validated the confirm password
       // what you will find you that it does not validate 
     });
-    this.registerForm.controls.Password.valueChanges.subscribe(()=>{
-      this.registerForm.controls.ConfirmPassowrd.updateValueAndValidity();
+    this.registerForm.controls.MyPass.valueChanges.subscribe(()=>{
+      this.registerForm.controls.confirmPassowrd.updateValueAndValidity();
       //when our passord changes we are going to update the validty of that field against  password 
     })
 

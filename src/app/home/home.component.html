@@ -1,16 +1,18 @@
 <app-nav></app-nav>
 
-<div class="container " id="top" *ngIf="!registerMode">
-    <div class="text-center">
-        <h1>Find Your MAte</h1>
-        <p class="lead">Come on to view your matches all you need to do is sign up</p>
+<div class="container pt-4">
+    <div class="row  mt-5 " id="top" *ngIf="!registerMode">
         <div class="text-center">
-            <button class="btn btn-primary btn-lg mr-2" [routerLink]="['/register']">Register</button>
-            <button class="btn btn-info btn-lg mx-2">Learn More</button>
-        </div>
-    </div> 
-</div>
-<div class="col-4" *ngIf="registerMode">
-    <app-register (CancelRegister)="CancelRegisterMode($event)"></app-register>
-
+            <h1>Find Your MAte</h1>
+            <p class="lead">Come on to view your matches all you need to do is sign up</p>
+            <div class="text-center">
+                <button class="btn btn-primary btn-lg mr-2" [routerLink]="['/register']">Register</button>
+                <button class="btn btn-info btn-lg mx-2">Learn More</button>
+            </div>
+        </div> 
+    </div>
+    <div class="col-4" *ngIf="registerMode">
+        <app-register (CancelRegister)="CancelRegisterMode($event)"></app-register>
+    
+    </div>
 </div>

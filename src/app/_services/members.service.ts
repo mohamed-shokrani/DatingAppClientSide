@@ -30,14 +30,14 @@ export class MembersService {
       
     }
    return this.http.get<Member[]>(this.apiUrl+ 'users',httpOptions).pipe(
-    map(m=>{this.members =m
+    map(ServerMemebers=>{this.members =ServerMemebers
         return this.members})
   
    )
   }
 
   GetMember(userName:string){
-    const member = this.members.find(x=> x.userName=== userName)
+    const member = this.members.find(x=> x.userName === userName)
     if (member !== undefined) {
       return of (member)
       

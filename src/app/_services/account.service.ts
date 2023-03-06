@@ -38,6 +38,8 @@ export class AccountService {
   }
   setCurrentUser(user:User){
     localStorage.setItem('user',JSON.stringify(user))
+    console.log("My user" +user);
+    
     this.CurrentUserSource.next(user)
   }
   logOut(){

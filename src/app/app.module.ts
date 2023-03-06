@@ -28,6 +28,8 @@ import { EditmemberComponent } from './editmember/editmember.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { EditMemberPhotoComponent } from './editmember/edit-member-photo/edit-member-photo.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { DateInputComponent } from './_forms/date-input/date-input.component';
 
 //import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -51,6 +53,9 @@ import { EditMemberPhotoComponent } from './editmember/edit-member-photo/edit-me
     MemberCardComponent,
     EditmemberComponent,
     EditMemberPhotoComponent,
+    TextInputComponent,
+    DateInputComponent,
+    
     
     
   ],
