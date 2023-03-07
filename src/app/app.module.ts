@@ -30,6 +30,7 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { EditMemberPhotoComponent } from './editmember/edit-member-photo/edit-member-photo.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
+import { AuthInterceptor, AuthInterceptorProvider } from './_interceptors/auth.interceptor';
 
 //import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -71,8 +72,10 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
     NgxSpinnerModule  
   ],
   providers: [
+    [AuthInterceptorProvider],
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},
 
   ],
   bootstrap: [AppComponent]

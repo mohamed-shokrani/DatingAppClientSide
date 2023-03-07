@@ -24,10 +24,15 @@
     </ul>
 
     <div class="btn-group" dropdown *ngIf="(accountService.CurrentUser$|async) as user">
-      <img src="{{user.photoUrl}}" alt="{{user.userName}}" class="img">
+
+
+
+
+      
+      <img src="{{user.photoUrl || './assets/user/femaleUser.jpg'}}" alt="{{'./assets/user/femaleUser.jpg'}}" class="img">
       <button id="button-animated" dropdownToggle type="button" class="btn btn-primary w-100 dropdown-toggle"
         aria-controls="dropdown-animated">
-       Welcome {{user.userName | titlecase}} <span class="caret"></span>
+       Welcome {{user.knownAs | titlecase}} <span class="caret"></span>
       </button>
       <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
         <li role="menuitem"><a routerLink="/member/edit" class="dropdown-item" href="#">Edit</a>

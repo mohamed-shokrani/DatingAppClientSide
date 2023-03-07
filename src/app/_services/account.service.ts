@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { map, ReplaySubject } from 'rxjs';
 import { User } from '../_Models/user';
 
@@ -14,7 +15,7 @@ export class AccountService {
   //  gonna store values inside inside her any type we subscribe to this obs 
   // is gonna emit last value inside it  
   CurrentUser$ = this.CurrentUserSource.asObservable()
-
+MyToken:string=""
   constructor(private http:HttpClient) {
     
    }
@@ -27,14 +28,19 @@ export class AccountService {
     return this.http.post(this.baseURL +'account/login', model).pipe(
       map((res:User)=>{
         const user = res;
-        console.log(res);
+        //console.log(res);
+        this.MyToken= res.token
+        console.log(this.MyToken);
         
         if(user){
          
           this.setCurrentUser(user);
         }
       })
-    ); 
+    )
+  }
+  ShowToken(){
+   return  this.MyToken
   }
   setCurrentUser(user:User){
     localStorage.setItem('user',JSON.stringify(user))

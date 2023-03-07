@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
@@ -13,14 +13,15 @@ import { AccountService } from '../_services/account.service';
 export class RegisterComponent implements OnInit {
   maxDate:Date;
   showDat:number;
+  ValidationError:string[]=[];
 
   @Output() CancelRegister = new EventEmitter();
   model:any ={};
   registerForm:FormGroup;
 
 
-  constructor(public route:Router,private accountService:AccountService
-    ,private toastr:ToastrService ,private fb:FormBuilder) { }
+  constructor(private accountService:AccountService
+    ,private toastr:ToastrService ,private fb:FormBuilder,public router:Router) { }
     
 
   ngOnInit(): void {
@@ -36,7 +37,7 @@ this.maxDate.setFullYear(  this.maxDate.getFullYear() -18);
       KnownAs :['',Validators.required],
       City :['',Validators.required],
       Country :['',Validators.required],
-      MyPass: ['',[Validators.required,Validators.minLength(4),Validators.maxLength(20)]],
+      Password: ['',[Validators.required,Validators.minLength(4),Validators.maxLength(20)]],
       confirmPassowrd: ['',[Validators.required, this.MatchValues('MyPass')]]
       // but there is a problem her if you changed the password after you validated the confirm password
       // what you will find you that it does not validate 
@@ -60,17 +61,19 @@ this.maxDate.setFullYear(  this.maxDate.getFullYear() -18);
     console.log(this.registerForm.value);
 
     
-  //   this.accountService.Register(this.model).subscribe(res=>{
-  //     console.log(res);
-  //     this.route.navigate(['/home'])
+    this.accountService.Register(this.registerForm.value).subscribe(res=>{
+      console.log(res);
+      this.router.navigateByUrl('/members')
+
+     // this.router.navigate(['/Members'])
       
       
-  //   },error=>{
-  //     console.log(error);
-  //     this.toastr.error(error.error);
+    },error=>{
+      console.log(error);
+      this.ValidationError =error;
 
       
-  //   })
+    })
 
     
   // }

@@ -5,7 +5,12 @@
 
 <div class="card mb-4">
     <div class="card-img-wrapper">
-        <img src="{{getMembers.photoUrl}}" alt="{{getMembers.knownAs}}" class="card-img-top">
+        <div *ngIf="getMembers.gender =='male' else elseBlock">
+            <img src="{{getMembers.photoUrl || './assets/user/user.png'}}" alt="{{getMembers.knownAs}}" class="card-img-top">
+        </div>
+        <ng-template #elseBlock>            <img src="{{getMembers.photoUrl || './assets/user/femaleUser.jpg'}}" alt="{{getMembers.knownAs}}" class="card-img-top">
+        </ng-template>
+
         <ul class="list-inline-item member-icons animate text-center" id="animate">
             <li  class="list-inline-item">
                 <button class="btn btn-btn-primary" routerLink='/members/{{getMembers.userName}}'>

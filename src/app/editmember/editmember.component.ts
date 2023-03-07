@@ -47,8 +47,8 @@ export class EditmemberComponent implements OnInit {
    this.MemberService.updateMember(this.member).subscribe(()=>{
      //to reset save button to be disabled again so the user can not submit it multiple times 
      this.Tostr.success("Profile Updated Successfully")
-     this.edidtForm.reset(this.member)
- 
+     this.edidtForm.reset(this.member);
+     //this.AcoountSevice.CurrentUser$.pipe(take(1)).subscribe(user=> this.user = user) 
   //  })
    //console.log(this.member);
    

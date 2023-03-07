@@ -1,6 +1,6 @@
 <div class="align-content-center  pt-5">
 
-<form mt-5 [formGroup]="registerForm" (ngSubmit)="Register()" autocomplete="off">
+<form mt-5 [formGroup]="registerForm"  (ngSubmit)="registerForm.valid && Register()" autocomplete="off">
 
     <h2 class="text-center  ">Sign Up</h2>
     <hr class="align-content-between m-4 ">
@@ -28,7 +28,7 @@
         <app-text-input [formControl]='registerForm.controls["username"]'
          [label]='"user Name"'>
         </app-text-input>
-        <app-text-input [formControl]='registerForm.controls["MyPass"]' [type]='"password"'
+        <app-text-input [formControl]='registerForm.controls["Password"]' [type]='"password"'
         [label]='"Passoword"'>
        </app-text-input>
         <!-- <app-text-input [formControl]='registerForm.controls["MyPass"]'
@@ -99,8 +99,14 @@
              </div>
         </div>
     </div> -->
+    <div class="row" *ngIf="ValidationError.length >0">
+        <ul class="text-danger" *ngFor="let error of ValidationError">
+            {{error}}
+        </ul>
+    </div> 
+
     <div class="col-centered w-50 text-center form-group mt-3 "  >
-        <button class="btn btn-success mx-2" type="submit" >Register</button>
+        <button class="btn btn-success mx-2" [disabled]="!registerForm.valid" type="submit" >Register</button>
         <button class="btn btn-danger  " type="button" [routerLink]="['/home']">Cancel</button>
     </div>
 
