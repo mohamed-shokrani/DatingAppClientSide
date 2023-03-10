@@ -1,10 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { map, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthInterceptor } from '../_interceptors/auth.interceptor';
 import { Member } from '../_Models/memebr';
+import { PaginatedResult } from '../_Models/pagination';
 import { Photo } from '../_Models/photo';
 import { AccountService } from './account.service';
 //remeber services are singletons that instantiated when the  component needs the service 
@@ -22,22 +23,47 @@ import { AccountService } from './account.service';
 export class MembersService {
 
   apiUrl = environment.apiUrl;
-   
+   paginatedResult:PaginatedResult<Member[]> = new PaginatedResult<Member[]>()
   members:Member[]=[]
-  constructor(private http:HttpClient ,private me:AccountService
+  constructor(private http:HttpClient 
   ) { }
 
-  GetMembers (){
-    if (this.members.length > 0) {
-      return of(this.members)
+  // GetMembers (){
+  //   if (this.members.length > 0) {
+  //     return of(this.members)
       
-    }
-   return this.http.get<Member[]>(this.apiUrl+ 'users').pipe(
-    map(ServerMemebers=>{this.members =ServerMemebers
-        return this.members})
+  //   }
+  //  return this.http.get<Member[]>(this.apiUrl+ 'users').pipe(
+  //   map(ServerMemebers=>{this.members =ServerMemebers
+  //       return this.members})
   
-   )
+  //  )
+  // }
+
+GetMembers(page?:number,itemsPerPage?:number){
+  let params = new HttpParams(); //gives us the abilty to serilize our paramters
+  if (page !== null && itemsPerPage !==null) {//other wise we are gonna stick to default and let the server decide what it wants to 
+    params = params.append("pageNumber",page.toString())
+    params = params.append("pageSize",itemsPerPage.toString())
+
+
+    
   }
+  return this.http.get<Member[]>(this.apiUrl +'users',{observe:'response',params}).pipe(
+    map(response=>{
+      this.paginatedResult.result = response.body;//our members array is gonna be contained inside here
+      if (response.headers.get("Pagination") !==null) {
+        this.paginatedResult.Pagination = JSON.parse(response.headers.get("Pagination"))
+        
+      }
+      return this.paginatedResult;
+    })
+  )
+}
+
+
+
+
 
   GetMember(userName:string){
     const member = this.members.find(x=> x.userName === userName)
