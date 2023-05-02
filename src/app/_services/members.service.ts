@@ -8,6 +8,7 @@ import { Member } from '../_Models/memebr';
 import { PaginatedResult } from '../_Models/pagination';
 import { Photo } from '../_Models/photo';
 import { AccountService } from './account.service';
+import { UserParams } from '../_modules/UserParams';
 //remeber services are singletons that instantiated when the  component needs the service 
 // and it operates as a singlton and it stays alive until the application is closed 
 // so services make a good candidate for storing application state 
@@ -23,7 +24,6 @@ import { AccountService } from './account.service';
 export class MembersService {
 
   apiUrl = environment.apiUrl;
-   paginatedResult:PaginatedResult<Member[]> = new PaginatedResult<Member[]>()
   members:Member[]=[]
   constructor(private http:HttpClient 
   ) { }
@@ -40,28 +40,44 @@ export class MembersService {
   //  )
   // }
 
-GetMembers(page?:number,itemsPerPage?:number){
-  let params = new HttpParams(); //gives us the abilty to serilize our paramters
-  if (page !== null && itemsPerPage !==null) {//other wise we are gonna stick to default and let the server decide what it wants to 
-    params = params.append("pageNumber",page.toString())
-    params = params.append("pageSize",itemsPerPage.toString())
-
-
+GetMembers(userParams:UserParams){
+ 
     
-  }
-  return this.http.get<Member[]>(this.apiUrl +'users',{observe:'response',params}).pipe(
-    map(response=>{
-      this.paginatedResult.result = response.body;//our members array is gonna be contained inside here
-      if (response.headers.get("Pagination") !==null) {
-        this.paginatedResult.Pagination = JSON.parse(response.headers.get("Pagination"))
-        
-      }
-      return this.paginatedResult;
-    })
-  )
+  let params = this.getPaginationHeaders(userParams.pageNumber,userParams.pageSize)
+  params = params.append('minAge',userParams.minAge.toString())
+  params = params.append('maxAge',userParams.maxAge.toString())
+  params = params.append('gender',userParams.gender)
+  params = params.append("orderBy",userParams.orderBy)
+
+  return this.getPaginatedResult<Member[]>(this.apiUrl+ 'users',params)
 }
 
+  private getPaginatedResult<T>(url,params) {
+    const paginatedResult:PaginatedResult<T> = new PaginatedResult<T>()
 
+    return this.http.get<T>(this.apiUrl + 'users', { observe: 'response', params }).pipe(
+      map(response => {
+        paginatedResult.result = response.body; //our members array is gonna be contained inside here
+        if (response.headers.get("Pagination") !== null) {
+          paginatedResult.Pagination = JSON.parse(response.headers.get("Pagination"));
+
+        }
+        return paginatedResult;
+      })
+    );
+  }
+
+getPaginationHeaders(pageNumber:number,pageSize:number){
+  let params = new HttpParams(); //gives us the abilty to serilize our paramters
+ //other wise we are gonna stick to default and let the server decide what it wants to 
+    params = params.append("pageNumber",pageNumber.toString())
+    params = params.append("pageSize",pageSize.toString())
+    
+
+
+return params
+  
+}
 
 
 

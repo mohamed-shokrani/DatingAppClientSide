@@ -1,3 +1,56 @@
+
+<div class="text-center mt-5">
+<h2>Your Matches - {{pagination?.totalItems}} </h2>
+
+</div>
+
+<div id="filetrs"class="row d-flex justify-content-center ">  
+  <form  #form="ngForm" class="form-inline ml-3" (ngSubmit)="loadmembers()"
+   autocomplete="off" >
+   <div class="form-group">
+    <label > Age From: </label>
+    <input type="number" class="form-control ml-2 " style="width: 70px;" name="minAge" [(ngModel)] =
+      "userParams.minAge">
+   </div>
+   <div class="form-group ">
+    <label > Age To: </label>
+    <input type="number" class="form-control ml-2 " style="width: 70px;" name="maxAge" [(ngModel)] =
+      "userParams.maxAge">
+   </div>
+   <div class="form-group px-2">
+    <label >Show</label>
+    <select name="gender" style="width: 130px;" class="form-control ml-3" [(ngModel)]="userParams.gender">
+      <option *ngFor="let gender of genderList" [value]="gender.value">
+        {{gender.display}}
+      </option>
+     </select>
+   </div>
+   <button class="btn btn-primary" type="submit">
+    Apply Filters
+   </button>
+   <button (click)="resetFilters()" class="btn btn-secondary mx-2" type="submit">Reset Filters</button>
+   <div class="col">
+    <div class="btn-group float-right">
+      <button class="btn btn-primary"
+       name="orderBy" 
+       [(ngModel)]="userParams.orderBy"
+       btnRadio="lastActive"
+       (click)="loadmembers()">
+            Last Active
+      </button> 
+      <button class="btn btn-primary"
+       name="orderBy" 
+       [(ngModel)]="userParams.orderBy"
+       btnRadio="created"
+       (click)="loadmembers()">
+            Newest Members
+      </button> 
+   </div>
+   
+
+   </div>
+  </form>
+</div>
 <div class="row">
     
     <div class="myclass" id="mycard" *ngFor="let member of members">
@@ -8,3 +61,25 @@
 
     
 </div>
+<div class="d-flex justify-content-center"  *ngIf="pagination">
+ 
+    <div class="row">
+        <div class="col-xs-12 col-12">
+          <pagination
+          [boundaryLinks]="true"
+           [totalItems]="pagination.totalItems" 
+          [itemsPerPage]="pagination.itemsPerPage" 
+
+          [(ngModel)]="pagination.currentPage"
+        
+           (pageChanged)="pageChanged($event)"
+          
+           previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+           ></pagination>
+        </div>
+      </div>
+       ddd
+      <!-- <pre class="card card-block card-header mb-3">
+        
+      </pre> -->
+</div>   

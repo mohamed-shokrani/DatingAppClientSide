@@ -3,7 +3,7 @@
 
 
 
-<div class="card mb-4">
+<div class="card mb-4 mt-4">
     <div class="card-img-wrapper">
         <div *ngIf="getMembers.gender =='male' else elseBlock">
             <img src="{{getMembers.photoUrl || './assets/user/user.png'}}" alt="{{getMembers.knownAs}}" class="card-img-top">
@@ -31,7 +31,7 @@
     <div class="card-body p-1">
         <h5 class="card-title text-center mb-1">
             <i class="fa fa-user mr-2"></i>
-            {{getMembers.knownAs}}
+            {{getMembers.knownAs}} ,{{getMembers.age}}
         </h5>
         <div class="card-text text-muted text-center">{{getMembers.city}}</div>
     </div>
