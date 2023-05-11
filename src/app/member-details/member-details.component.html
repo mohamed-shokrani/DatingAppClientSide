@@ -19,11 +19,11 @@
         </div>
         <div>
             <strong>Member Since</strong>
-            <p>{{member.created}}, {{member.country}}</p>
+            <p>{{member.created | date}}, {{member.country}}</p>
         </div>
         <div>
             <strong>Member Last Active</strong>
-            <p>{{member.lastActive}}, {{member.country}}</p>
+            <p>{{member.lastActive | timeago }}, {{member.country}}</p>
         </div>
         <div class="card-footer">
             <div class="btn-group d-flex">

@@ -7,8 +7,4 @@ export interface MemberTest {
     interests: string;
     city: string;
     country: string;
-  
-    
-   
-   
 }

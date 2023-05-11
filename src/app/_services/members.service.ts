@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
-import { map, of } from 'rxjs';
+import { map, of, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthInterceptor } from '../_interceptors/auth.interceptor';
 import { Member } from '../_Models/memebr';
@@ -9,14 +9,10 @@ import { PaginatedResult } from '../_Models/pagination';
 import { Photo } from '../_Models/photo';
 import { AccountService } from './account.service';
 import { UserParams } from '../_modules/UserParams';
+import { User } from '../_Models/user';
 //remeber services are singletons that instantiated when the  component needs the service 
 // and it operates as a singlton and it stays alive until the application is closed 
 // so services make a good candidate for storing application state 
-// const httpOptions= {
-//   headers:new HttpHeaders({
-//     Authorization:
-//    // Authorization:'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJtb2hhbWVkIHNob2tyYW5pIiwibmJmIjoxNjc4MjE2NjQ3LCJleHAiOjE2Nzk5NDQ2NDcsImlhdCI6MTY3ODIxNjY0N30.KjiA14KDb56QiwzFTxJqMrdtqDlpJE4UXP9gVAO22Yn9WTlrd531tAvS1re5DiVpvMZ9Bfk9F-C-f0hFss6Zig'
-// })}
 
 @Injectable({
   providedIn: 'root'
@@ -24,25 +20,37 @@ import { UserParams } from '../_modules/UserParams';
 export class MembersService {
 
   apiUrl = environment.apiUrl;
-  members:Member[]=[]
-  constructor(private http:HttpClient 
-  ) { }
+  members:Member[]=[];
+  user:User;
+  userParams :UserParams;
+   memberCache = new Map();
 
-  // GetMembers (){
-  //   if (this.members.length > 0) {
-  //     return of(this.members)
-      
-  //   }
-  //  return this.http.get<Member[]>(this.apiUrl+ 'users').pipe(
-  //   map(ServerMemebers=>{this.members =ServerMemebers
-  //       return this.members})
-  
-  //  )
-  // }
+  constructor(private http:HttpClient ,private accountService:AccountService
+  ) { 
 
+    this.accountService.CurrentUser$.pipe(take(1)).subscribe(user=>
+      {
+        this.user = user;
+        this.userParams = new UserParams(this.user);
+        
+        
+      })
+  }
+  getUserPramas(){
+    return this.userParams;
+  }
+  setUserParams(params:UserParams){
+    this.userParams = params;
+  }
+resetUserParams(){
+  this.userParams = new UserParams(this.user);
+  return this.userParams;
+}
 GetMembers(userParams:UserParams){
- 
-    
+ var res =  this.memberCache.get(Object.values(userParams).join("-"))
+    if(res){
+      return of(res)
+    }
   let params = this.getPaginationHeaders(userParams.pageNumber,userParams.pageSize)
   params = params.append('minAge',userParams.minAge.toString())
   params = params.append('maxAge',userParams.maxAge.toString())
@@ -50,6 +58,11 @@ GetMembers(userParams:UserParams){
   params = params.append("orderBy",userParams.orderBy)
 
   return this.getPaginatedResult<Member[]>(this.apiUrl+ 'users',params)
+  .pipe(map(response=>
+    {
+      this.memberCache.set(Object.values(userParams).join("-") ,response)
+      return response;
+    }))
 }
 
   private getPaginatedResult<T>(url,params) {
@@ -82,11 +95,12 @@ return params
 
 
   GetMember(userName:string){
-    const member = this.members.find(x=> x.userName === userName)
-    if (member !== undefined) {
-      return of (member)
-      
-    }
+    const member = [...this.memberCache.values()]
+     .reduce((arr,elem)=> arr.concat(elem.result),[]) 
+     .find((member:Member)=>member.userName === userName)
+     if (member) {
+      return of(member)
+     }     
     return this.http.get<Member>(this.apiUrl+'users/'+userName )
    }
    updateMember(memebr:Member){
