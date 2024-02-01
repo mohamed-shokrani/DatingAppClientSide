@@ -14,9 +14,11 @@ import { User } from '../_Models/user';
 // and it operates as a singlton and it stays alive until the application is closed 
 // so services make a good candidate for storing application state 
 
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class MembersService {
 
   apiUrl = environment.apiUrl;
@@ -24,7 +26,7 @@ export class MembersService {
   user:User;
   userParams :UserParams;
    memberCache = new Map();
-
+  
   constructor(private http:HttpClient ,private accountService:AccountService
   ) { 
 
@@ -79,7 +81,14 @@ GetMembers(userParams:UserParams){
       })
     );
   }
-
+addLikes(userName :string){
+return this.http.post(this.apiUrl +'Likes/'+userName,{});
+}
+getLikes(predicate :string,pageNumber:number,pageSize:number){
+  let params = this.getPaginationHeaders(pageNumber,pageSize);
+  params = params.append('predicate',predicate)
+return this.getPaginatedResult <Partial< Member[]>>(this.apiUrl +'Likes?predicate='+predicate,params)
+  }
 getPaginationHeaders(pageNumber:number,pageSize:number){
   let params = new HttpParams(); //gives us the abilty to serilize our paramters
  //other wise we are gonna stick to default and let the server decide what it wants to 

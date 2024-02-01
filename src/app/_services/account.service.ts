@@ -30,8 +30,8 @@ MyToken:string=""
         const user = res;
         //console.log(res);
         this.MyToken= res.token
-        console.log(this.MyToken);
-        
+        console.log("token is" + this.MyToken);
+         localStorage.setItem('userToken',this.MyToken);
         if(user){
          
           this.setCurrentUser(user);
@@ -40,6 +40,7 @@ MyToken:string=""
     )
   }
   ShowToken(){
+    console.log(this.MyToken);
    return  this.MyToken
   }
   setCurrentUser(user:User){
