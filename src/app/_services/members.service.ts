@@ -10,6 +10,7 @@ import { Photo } from '../_Models/photo';
 import { AccountService } from './account.service';
 import { UserParams } from '../_modules/UserParams';
 import { User } from '../_Models/user';
+import { getPaginatedResult, getPaginationHeaders } from './PaginationHelper';
 //remeber services are singletons that instantiated when the  component needs the service 
 // and it operates as a singlton and it stays alive until the application is closed 
 // so services make a good candidate for storing application state 
@@ -53,13 +54,13 @@ GetMembers(userParams:UserParams){
     if(res){
       return of(res)
     }
-  let params = this.getPaginationHeaders(userParams.pageNumber,userParams.pageSize)
+  let params = getPaginationHeaders(userParams.pageNumber,userParams.pageSize)
   params = params.append('minAge',userParams.minAge.toString())
   params = params.append('maxAge',userParams.maxAge.toString())
   params = params.append('gender',userParams.gender)
   params = params.append("orderBy",userParams.orderBy)
 
-  return this.getPaginatedResult<Member[]>(this.apiUrl+ 'users',params)
+  return getPaginatedResult<Member[]>(this.apiUrl+ 'users',params,this.http)
   .pipe(map(response=>
     {
       this.memberCache.set(Object.values(userParams).join("-") ,response)
@@ -67,39 +68,16 @@ GetMembers(userParams:UserParams){
     }))
 }
 
-  private getPaginatedResult<T>(url,params) {
-    const paginatedResult:PaginatedResult<T> = new PaginatedResult<T>()
 
-    return this.http.get<T>(this.apiUrl + 'users', { observe: 'response', params }).pipe(
-      map(response => {
-        paginatedResult.result = response.body; //our members array is gonna be contained inside here
-        if (response.headers.get("Pagination") !== null) {
-          paginatedResult.Pagination = JSON.parse(response.headers.get("Pagination"));
-
-        }
-        return paginatedResult;
-      })
-    );
-  }
 addLikes(userName :string){
 return this.http.post(this.apiUrl +'Likes/'+userName,{});
 }
 getLikes(predicate :string,pageNumber:number,pageSize:number){
-  let params = this.getPaginationHeaders(pageNumber,pageSize);
+  let params = getPaginationHeaders(pageNumber,pageSize);
   params = params.append('predicate',predicate)
-return this.getPaginatedResult <Partial< Member[]>>(this.apiUrl +'Likes?predicate='+predicate,params)
+return getPaginatedResult <Partial< Member[]>>(this.apiUrl +'Likes?predicate='+predicate,params,this.http)
   }
-getPaginationHeaders(pageNumber:number,pageSize:number){
-  let params = new HttpParams(); //gives us the abilty to serilize our paramters
- //other wise we are gonna stick to default and let the server decide what it wants to 
-    params = params.append("pageNumber",pageNumber.toString())
-    params = params.append("pageSize",pageSize.toString())
-    
 
-
-return params
-  
-}
 
 
 
