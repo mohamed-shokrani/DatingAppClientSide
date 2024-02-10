@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from '../_Models/message';
+import { Message } from '../_Models/Message';
 import { Pagination } from '../_Models/pagination';
 import { MessageService } from '../_services/message.service';
 import { tick } from '@angular/core/testing';

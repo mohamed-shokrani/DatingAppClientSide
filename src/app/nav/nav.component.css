@@ -1,6 +1,5 @@
 #nav{
-    z-index: 1000!important;
-    top:0%;
+   display: block;
 }
 .dropdown-toggle, .dropdown-item{
 cursor: pointer;

@@ -4,31 +4,32 @@
 
 </div>
 
-<div id="filetrs"class="row d-flex justify-content-center ">  
-  <form  #form="ngForm" class="form-inline ml-3" (ngSubmit)="loadmembers()"
+<div id="filetrs"class="container">  
+  <form  #form="ngForm" class="d-flex ml-3" (ngSubmit)="loadmembers()"
    autocomplete="off" >
-   <div class="form-group">
-    <label > Age From: </label>
-    <input type="number" class="form-control ml-2 " style="width: 70px;" name="minAge" [(ngModel)] =
+   <div>
+    <label class="mx-2"> Age From: </label>
+    <input type="number" class=" " style="width: 70px;" name="minAge" [(ngModel)] =
       "userParams.minAge">
+     
    </div>
-   <div class="form-group ">
-    <label > Age To: </label>
-    <input type="number" class="form-control ml-2 " style="width: 70px;" name="maxAge" [(ngModel)] =
+   <div >
+    <label class="mx-2">  Age To: </label>
+    <input type="number"  style="width: 70px;" name="maxAge" [(ngModel)] =
       "userParams.maxAge">
    </div>
    <div class="form-group px-2">
-    <label >Show</label>
-    <select name="gender" style="width: 130px;" class="form-control ml-3" [(ngModel)]="userParams.gender">
+    <label class="mx-2">Show</label>
+    <select name="gender" style="width: 130px;" class=" ml-5" [(ngModel)]="userParams.gender">
       <option *ngFor="let gender of genderList" [value]="gender.value">
         {{gender.display}}
       </option>
      </select>
    </div>
-   <button class="btn btn-primary" type="submit">
+   <button style="max-height:40px;font-size: 15px;" class="btn btn-primary" type="submit">
     Apply Filters
    </button>
-   <button (click)="resetFilters()" class="btn btn-secondary mx-2" type="submit">Reset Filters</button>
+   <button style="max-height:40px;font-size: 15px;" (click)="resetFilters()" class="btn btn-secondary mx-2" type="submit">Reset Filters</button>
    <div class="col">
     <div class="btn-group float-right">
       <button class="btn btn-primary"
@@ -51,7 +52,7 @@
    </div>
   </form>
 </div>
-<div class="row">
+<div class="row d-flex justify-content-center">
     
     <div class="myclass" id="mycard" *ngFor="let member of members">
 
