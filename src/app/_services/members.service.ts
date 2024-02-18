@@ -101,7 +101,6 @@ return getPaginatedResult <Partial< Member[]>>(this.apiUrl +'Likes?predicate='+p
     );
    }
    setMainPhoto(photoId:number){
-    console.log(photoId);
           return this.http.put(this.apiUrl+'users/set-main-photo/'+ photoId ,{})
    }
    DeletePhoto(photoId:number){

@@ -30,7 +30,7 @@
 
  </tr>
  <tr  *ngFor="let message of messages" 
-  routerLink='{{container === "Outbox" 
+            routerLink='{{container === "Outbox" 
                          ? "/members/"+ message.recipientName 
                          :"/members/"+message.senderUserName }}'>
         <td>{{message.content}}</td>

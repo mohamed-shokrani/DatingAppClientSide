@@ -13,8 +13,8 @@ busy(){
   this.spinnerServices.show(undefined,{
     bdColor:"grey",
     size:"large",
-    color:"#fff",
-    type:"ball-scale-multiple",
+    color:"red",
+    
 
    
   })
@@ -23,6 +23,7 @@ busy(){
   this.busyRequestCount--;
   if (this.busyRequestCount <= 0) {
     this.busyRequestCount =0;
+    
     this.spinnerServices.hide()
     
   }

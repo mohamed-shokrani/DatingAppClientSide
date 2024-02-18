@@ -30,7 +30,6 @@ MyToken:string=""
         const user = res;
         //console.log(res);
         this.MyToken= res.token
-        console.log("token is" + this.MyToken);
          localStorage.setItem('userToken',this.MyToken);
         if(user){
          
@@ -40,12 +39,10 @@ MyToken:string=""
     )
   }
   ShowToken(){
-    console.log(this.MyToken);
    return  this.MyToken
   }
   setCurrentUser(user:User){
     localStorage.setItem('user',JSON.stringify(user))
-    console.log("My user" +user);
     
     this.CurrentUserSource.next(user)
   }

@@ -37,7 +37,6 @@ resetFilters(){
     this.memberService.GetMembers(this.userParams).subscribe(response=>{
        this.members=response.result;
 
-       console.log("response result" + this.members);
        
        this.pagination = response.Pagination
       

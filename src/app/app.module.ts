@@ -31,6 +31,7 @@ import { EditMemberPhotoComponent } from './editmember/edit-member-photo/edit-me
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { AuthInterceptor, AuthInterceptorProvider } from './_interceptors/auth.interceptor';
+import { MemberMessagesComponent } from './member-list/member-messages/member-messages.component';
 
 //import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -56,6 +57,7 @@ import { AuthInterceptor, AuthInterceptorProvider } from './_interceptors/auth.i
     EditMemberPhotoComponent,
     TextInputComponent,
     DateInputComponent,
+    MemberMessagesComponent,
     
     
     
